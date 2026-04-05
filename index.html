@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KAIZEN - Aprende Lenguaje de Señas</title>
+<link href="styles-sign-language.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+</head>
+<body>
+<!-- Preloader -->
+<div class="preloader" id="preloader">
+<div class="preloader-content">
+<div class="loading-circle">
+<div class="loading-bar"></div>
+</div>
+<div class="loading-text">Cargando...</div>
+<div class="loading-text">En unos momentos estara disponible el curso </div>
+<div class="loading-percentage">0%</div>
+
+</div>
+</div>
+<!-- Logo Animation Screen -->
+<div class="logo-screen hidden" id="logoScreen">
+<div class="logo-container">
+<img alt="KAIZEN Logo" class="main-logo" src="archivos/LOGO.gif"/>
+<div class="kaizen-text">
+<span class="letter">K</span>
+<span class="letter">A</span>
+<span class="letter">I</span>
+<span class="letter">Z</span>
+<span class="letter">E</span>
+<span class="letter">N</span>
+</div>
+<div class="subtitle">Lenguaje de Señas</div>
+<button class="start-button hidden" id="startBtn">COMENZAR</button>
+</div>
+</div>
+<!-- Main App -->
+<div class="main-app hidden" id="mainApp">
+<!-- Header -->
+<header class="header">
+<div class="header-content">
+<div class="logo-small">
+<img alt="KAIZEN" class="logo-img" src="uploaded_files/TERESIAS.gif?expires=1777786962&amp;tid=affa8283-b224-4f6a-8349-50f0ac67ef4a&amp;signature=27c48811a41d2575ec49836fbc85938b567b5016ffeac2feb8c31bec9f177797"/>
+<span class="logo-text">KAIZEN</span>
+<span class="logo-subtitle">Señas</span>
+</div>
+<div class="stats">
+<div class="stat-item">
+<i class="fas fa-fire"></i>
+<span id="streakCount">0</span>
+</div>
+<div class="stat-item">
+<i class="fas fa-gem"></i>
+<span id="diamondCount">100</span>
+</div>
+<div class="stat-item lives-container">
+<i class="fas fa-heart"></i>
+<span id="livesCount">5</span>
+<div class="lives-timer hidden" id="livesTimer">
+<span id="timerText">29:59</span>
+</div>
+</div>
+</div>
+<div class="profile-icon" id="profileIcon">
+<img alt="Profile" id="profileImg" src="https://via.placeholder.com/40x40/4CAF50/white?text=U"/>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="main-content">
+<!-- Navigation Tabs -->
+<nav class="nav-tabs">
+<button class="nav-tab active" data-tab="learn">
+<i class="fas fa-hands"></i>
+<span>Aprender</span>
+</button>
+<button class="nav-tab" data-tab="practice">
+<i class="fas fa-eye"></i>
+<span>Practicar</span>
+</button>
+<button class="nav-tab" data-tab="dictionary">
+<i class="fas fa-book"></i>
+<span>Diccionario</span>
+</button>
+<button class="nav-tab" data-tab="profile">
+<i class="fas fa-user"></i>
+<span>Perfil</span>
+</button>
+</nav>
+<!-- Learn Tab Content -->
+<div class="tab-content active" id="learnTab">
+<div class="progress-section">
+<div class="section-header">
+<h2>Tu progreso en señas</h2>
+<div class="level-info">
+<span>Nivel <span id="currentLevel">1</span></span>
+<div class="xp-bar">
+<div class="xp-fill" id="xpFill" style="width: 0%"></div>
+</div>
+<span><span id="currentXP">0</span>/100 XP</span>
+</div>
+</div>
+</div>
+<div class="lessons-container" id="lessonsContainer">
+<!-- Sign language lessons will be generated dynamically -->
+</div>
+</div>
+<!-- Practice Tab Content -->
+<div class="tab-content" id="practiceTab">
+<div class="practice-options">
+<h2>Práctica de Señas</h2>
+<div class="practice-cards">
+<div class="practice-card">
+<i class="fas fa-stopwatch"></i>
+<h3>Práctica rápida</h3>
+<p>Reconoce señas en 5 minutos</p>
+<button class="practice-btn" data-mode="quick">Comenzar</button>
+</div>
+<div class="practice-card">
+<i class="fas fa-spell-check"></i>
+<h3>Deletreo</h3>
+<p>Practica el alfabeto</p>
+<button class="practice-btn" data-mode="spelling">Comenzar</button>
+</div>
+<div class="practice-card">
+<i class="fas fa-calculator"></i>
+<h3>Números</h3>
+<p>Aprende los números del 0 al 100</p>
+<button class="practice-btn" data-mode="numbers">Comenzar</button>
+</div>
+<div class="practice-card">
+<i class="fas fa-comments"></i>
+<h3>Conversación</h3>
+<p>Frases y expresiones comunes</p>
+<button class="practice-btn" data-mode="conversation">Comenzar</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Dictionary Tab Content -->
+<div class="tab-content" id="dictionaryTab">
+<div class="dictionary-section">
+<h2>Diccionario de Señas</h2>
+<div class="search-container">
+<input id="searchInput" placeholder="Buscar una seña..." type="text"/>
+<button id="searchBtn"><i class="fas fa-search"></i></button>
+</div>
+<div class="dictionary-categories">
+<button class="category-btn active" data-category="all">Todas</button>
+<button class="category-btn" data-category="alphabet">Alfabeto</button>
+<button class="category-btn" data-category="numbers">Números</button>
+<button class="category-btn" data-category="family">Familia</button>
+<button class="category-btn" data-category="colors">Colores</button>
+<button class="category-btn" data-category="emotions">Emociones</button>
+<button class="category-btn" data-category="actions">Acciones</button>
+</div>
+<div class="dictionary-grid" id="dictionaryGrid">
+<!-- Dictionary items will be loaded here -->
+</div>
+</div>
+</div>
+<!-- Profile Tab Content -->
+<div class="tab-content" id="profileTab">
+<div class="profile-section">
+<h2>Tu perfil</h2>
+<div class="profile-card">
+<div class="profile-photo-section">
+<img alt="Profile" id="profilePhotoLarge" src="https://via.placeholder.com/100x100/4CAF50/white?text=U"/>
+<button class="change-photo-btn" id="changePhotoBtn">
+<i class="fas fa-camera"></i>
+                                Cambiar foto
+                            </button>
+<input accept="image/*" id="photoInput" style="display: none;" type="file"/>
+</div>
+<div class="profile-stats">
+<div class="stat">
+<span class="stat-value" id="totalXP">0</span>
+<span class="stat-label">XP Total</span>
+</div>
+<div class="stat">
+<span class="stat-value" id="currentStreak">0</span>
+<span class="stat-label">Racha actual</span>
+</div>
+<div class="stat">
+<span class="stat-value" id="signsLearned">0</span>
+<span class="stat-label">Señas aprendidas</span>
+</div>
+<div class="stat">
+<span class="stat-value" id="practiceTime">0</span>
+<span class="stat-label">Minutos practicados</span>
+</div>
+</div>
+<div class="achievements">
+<h3>Logros</h3>
+<div class="achievement-grid" id="achievementGrid">
+<!-- Achievements will be loaded here -->
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Sign Lesson Modal -->
+<div class="modal hidden" id="signLessonModal">
+<div class="modal-content">
+<div class="lesson-header">
+<button class="close-btn" id="closeSignLessonBtn">
+<i class="fas fa-times"></i>
+</button>
+<div class="lesson-progress">
+<div class="progress-bar">
+<div class="progress-fill" id="signLessonProgress"></div>
+</div>
+<span class="progress-text">1/5</span>
+</div>
+<div class="lives-display">
+<i class="fas fa-heart"></i>
+<span id="modalLivesCount">5</span>
+</div>
+</div>
+<div class="sign-lesson-content" id="signLessonContent">
+<!-- Sign lesson content will be loaded here -->
+</div>
+</div>
+</div>
+<!-- Practice Modal -->
+<div class="modal hidden" id="practiceModal">
+<div class="modal-content">
+<div class="practice-header">
+<button class="close-btn" id="closePracticeBtn">
+<i class="fas fa-times"></i>
+</button>
+<div class="practice-timer">
+<i class="fas fa-clock"></i>
+<span id="practiceTimer">5:00</span>
+</div>
+<div class="practice-score">
+<i class="fas fa-star"></i>
+<span id="practiceScore">0</span>
+</div>
+</div>
+<div class="practice-content" id="practiceContent">
+<!-- Practice content will be loaded here -->
+</div>
+</div>
+</div>
+<!-- Sign Detail Modal -->
+<div class="modal hidden" id="signDetailModal">
+<div class="modal-content">
+<div class="modal-header">
+<h2 id="signDetailTitle">Seña</h2>
+<button class="close-btn" id="closeSignDetailBtn">
+<i class="fas fa-times"></i>
+</button>
+</div>
+<div class="sign-detail-content">
+<div class="sign-visual">
+<img alt="Seña" id="signDetailImage" src=""/>
+<video controls="" id="signDetailVideo" loop="" style="display: none;">
+<source src="" type="video/mp4"/>
+</video>
+</div>
+<div class="sign-info">
+<div class="sign-description" id="signDescription">
+                        Descripción de la seña
+                    </div>
+<div class="sign-tips" id="signTips">
+<h4>Consejos:</h4>
+<ul id="signTipsList">
+<!-- Tips will be loaded here -->
+</ul>
+</div>
+<div class="sign-actions">
+<button class="action-btn" id="favoriteBtn">
+<i class="far fa-heart"></i>
+                            Favorito
+                        </button>
+<button class="action-btn" id="practiceSignBtn">
+<i class="fas fa-play"></i>
+                            Practicar
+                        </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Treasure Chest Modal -->
+<div class="modal hidden" id="chestModal">
+<div class="modal-content chest-modal">
+<div class="chest-animation">
+<i class="fas fa-treasure-chest"></i>
+</div>
+<h2>¡Cofre del tesoro!</h2>
+<p>Has completado 8 niveles de señas. ¡Aquí tienes tu recompensa!</p>
+<div class="rewards">
+<div class="reward">
+<i class="fas fa-gem"></i>
+<span>+50 Diamantes</span>
+</div>
+<div class="reward">
+<i class="fas fa-heart"></i>
+<span>+2 Vidas</span>
+</div>
+</div>
+<button class="claim-btn" id="claimRewardsBtn">Reclamar</button>
+</div>
+</div>
+<!-- Shop Modal -->
+<div class="modal hidden" id="shopModal">
+<div class="modal-content">
+<div class="modal-header">
+<h2>Tienda</h2>
+<button class="close-btn" id="closeShopBtn">
+<i class="fas fa-times"></i>
+</button>
+</div>
+<div class="shop-items">
+<div class="shop-item">
+<i class="fas fa-heart"></i>
+<h3>Recargar vidas</h3>
+<p>Recupera todas tus vidas</p>
+<div class="price">
+<i class="fas fa-gem"></i>
+<span>50</span>
+</div>
+<button class="buy-btn" data-item="lives">Comprar</button>
+</div>
+<div class="shop-item">
+<i class="fas fa-shield-alt"></i>
+<h3>Protector de racha</h3>
+<p>Protege tu racha por 1 día</p>
+<div class="price">
+<i class="fas fa-gem"></i>
+<span>100</span>
+</div>
+<button class="buy-btn" data-item="streak-freeze">Comprar</button>
+</div>
+<div class="shop-item">
+<i class="fas fa-video"></i>
+<h3>Videos premium</h3>
+<p>Acceso a videos de señas en HD</p>
+<div class="price">
+<i class="fas fa-gem"></i>
+<span>200</span>
+</div>
+<button class="buy-btn" data-item="premium-videos">Comprar</button>
+</div>
+</div>
+</div>
+</div>
+<script src="script-sign-language.js"></script>
+</body>
+</html>
